@@ -1,0 +1,16 @@
+# Use an existing docker image as a base for Node App
+FROM node:alpine
+
+WORKDIR /opt/app
+
+#Copy files in current directory.
+#Copy Just the file needed to install npm
+COPY  ./package.json ./
+# Run command in container at boot.
+RUN npm install
+# Copy the remaining files. So if you make changes to index.js, you will only have to start rebuild
+# at this stage in the file.
+# We could remove this if we use volumes. But it makes sense to keep it in, in case we
+# move away from Docker Compose. 
+COPY ./ ./
+CMD ["npm", "start"]
