@@ -13,5 +13,6 @@ RUN npm run build
 
 # Use an existing docker image as a base for Node App
 FROM nginx
+EXPOSE 80
 #Nginx is started automatically
 COPY --from=builder /opt/app/build /usr/share/nginx/html
